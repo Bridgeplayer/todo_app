@@ -1,0 +1,40 @@
+<% flash.each do |key, value| %>
+   <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+<div class = "container">
+	<div class = "row">
+		<div class = "col-sm-offset-2 col-sm-8">
+			<h2> New Todo List </h2>
+
+			<%= form_for @tasklist, url: tasklist_path, method: :put, class: 'form-horizontal' do |f| %>
+					<div class="form-group row"> 
+						<%= f.label :category, class: "col-sm-2 control-label" %>
+						<div class="col-sm-10">
+							<%= f.text_field :category, class: "form-control" %>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<%= f.label :description, class: "col-sm-2 control-label" %>
+						<div class="col-sm-10">
+							<%= f.text_area :description, class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-offset-2 col-sm-10">
+							<%= f.submit "Update", class: "btn btn-default" %>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-offset-2 col-sm-10">
+							<%= link_to 'Back', tasklist_path(id: @tasklist.id), class:"btn btn-warning" %>
+						</div>
+					</div>
+			<% end %>
+		
+		</div>
+	</div>
+</div>

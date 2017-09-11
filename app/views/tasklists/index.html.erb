@@ -1,0 +1,118 @@
+<h1> All Tasklists </h1>
+
+<table class = "table">
+	<thead>
+		<tr>
+			<th> Title </th>
+			<th> Description </th>
+			<th> Created At </th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @tasklist.each do |tasklist| %>
+
+			<tr> 
+				<td>
+					<%= tasklist.category %>
+				</td>
+
+				<td>
+					<%= tasklist.description %>
+				</td>
+				<td>
+					<%= tasklist.created_at.strftime('%e %b %Y, %l:%M%P')%>
+				</td>
+				<td>
+					<div class = "btn btn-warning">
+						<%= link_to "Show", tasklist_path(id: tasklist.id) %>
+					</div>
+				</td>
+				<td>
+					<div class = "btn btn-info">
+						<%= link_to "Edit", edit_tasklist_path(id: tasklist.id) %>
+					</div>
+				</td>
+				<td>
+					<div class = "btn btn-danger">
+						<%= link_to "Delete", tasklist_path(id: tasklist.id), method: :delete %>
+					</div>
+				<td>	
+
+			</tr>
+
+		<% end %>
+
+	</tbody>
+</table>
+
+<%= link_to "New Tasklists", new_tasklist_path, class: "btn btn-info" %> 
+
+<h1> Task within 7 days of due_date </h1>
+
+<table class = "table">
+	<thead>
+		<tr>
+			<th> Action </th>
+			<th> Due Date </th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @pending_task.each do |pending_task| %>
+
+		<tr> 
+				<td>
+					<%= pending_task.action %>
+				</td>
+
+				<td>
+					<%= pending_task.due_date %>
+				</td>
+
+				<td>
+					<div class = "btn btn-warning">
+						<%= link_to "Show Tasklist", tasklist_path(id: pending_task.tasklist_id) %>
+					</div>
+				</td>
+		</tr>
+
+		<% end %>
+	</tbody>
+</table>
+
+<h1> Task Overdue </h1>
+
+<table class = "table">
+	<thead>
+		<tr>
+			<th> Action </th>
+			<th> Due Date </th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @overdue_task.each do |overdue_task| %>
+
+		<tr> 
+				<td>
+					<%= overdue_task.action %>
+				</td>
+
+				<td>
+					<%= overdue_task.due_date %>
+				</td>
+
+				<td>
+					<div class = "btn btn-warning">
+						<%= link_to "Show Tasklist", tasklist_path(id: overdue_task.tasklist_id) %>
+					</div>
+				</td>
+		</tr>
+
+		<% end %>
+	</tbody>
+</table>
+
